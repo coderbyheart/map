@@ -1,0 +1,82 @@
+{
+  "name": "@hello.nrfcloud.com/map",
+  "version": "0.0.0-development",
+  "description": "View IoT devices powered by Nordic Semiconductor hardware all around the globe.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hello-nrfcloud/map.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hello-nrfcloud/map/issues"
+  },
+  "homepage": "https://hello.nrfcloud.com/map",
+  "keywords": [
+    "nordicsemiconductor",
+    "cellular-iot",
+    "map",
+    "hello-nrfcloud"
+  ],
+  "author": "Nordic Semiconductor ASA | nordicsemi.no",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "start": "vite",
+    "build": "node --max_old_space_size=8192 ./node_modules/vite/bin/vite.js build --emptyOutDir && cp -v ./manifest.json ./build/client/",
+    "prepare": "husky install",
+    "test": "find ./ -type f -name \\*.spec.ts -not -path './node_modules/*' | xargs npx tsx --test --test-reporter spec"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "18.4.2",
+    "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.110",
+    "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "16.0.23",
+    "@nordicsemiconductor/from-env": "2.0.0",
+    "@types/node": "20.9.0",
+    "@typescript-eslint/eslint-plugin": "6.11.0",
+    "eslint": "8.53.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-prefer-arrow": "1.2.3",
+    "eslint-plugin-unicorn": "49.0.0",
+    "husky": "8.0.3",
+    "prettier": "3.1.0",
+    "vite": "4.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --ext .js,.ts,.jsx,.tsx"
+    ],
+    "*.{md,json,yaml,yml,html}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
+  "release": {
+    "branches": [
+      "saga"
+    ],
+    "remoteTags": true,
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false,
+          "failTitle": false
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@sentry/browser": "7.80.1",
+    "date-fns": "2.30.0",
+    "solid-devtools": "0.29.1",
+    "vite-plugin-solid": "2.7.2"
+  }
+}
